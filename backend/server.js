@@ -19,6 +19,16 @@ app.use(express.urlencoded({ extended: true }));
 
 connectDB();
 
+/* =========================
+   PING ROUTE (KEEP ALIVE)
+   ========================= */
+app.get('/ping', (req, res) => {
+  res.status(200).send('pong');
+});
+
+/* =========================
+   API ROUTES
+   ========================= */
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/stats', statsRoutes);
@@ -31,6 +41,9 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+/* =========================
+   ERROR HANDLER
+   ========================= */
 app.use((err, req, res, next) => {
   console.error('Error:', err);
   res.status(err.status || 500).json({
@@ -45,7 +58,7 @@ app.listen(PORT, () => {
   console.log('==========================================');
   console.log('🚀 FER3OON DASHBOARD SERVER');
   console.log('==========================================');
-  console.log(`📡 Server: http://localhost:${PORT}`);
+  console.log(`📡 Server running on port ${PORT}`);
   console.log(`🔐 Admin: ${process.env.ADMIN_USERNAME}`);
   console.log('==========================================');
 });
