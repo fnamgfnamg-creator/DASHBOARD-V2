@@ -59,31 +59,4 @@ app.listen(PORT, () => {
   console.log(`📡 Server running on: http://localhost:${PORT}`);
   console.log(`🔐 Admin: ${process.env.ADMIN_USERNAME}`);
   console.log('==========================================');
-});  res.json({ 
-    status: 'OK', 
-    timestamp: new Date().toISOString(),
-    port: process.env.PORT 
-  });
-});
-
-/* =========================
-   ERROR HANDLER
-   ========================= */
-app.use((err, req, res, next) => {
-  console.error('Error:', err);
-  res.status(err.status || 500).json({
-    success: false,
-    message: err.message || 'Internal server error'
-  });
-});
-
-const PORT = process.env.PORT || 10000;
-
-app.listen(PORT, () => {
-  console.log('==========================================');
-  console.log('🚀 FER3OON DASHBOARD SERVER');
-  console.log('==========================================');
-  console.log(`📡 Server running on port ${PORT}`);
-  console.log(`🔐 Admin: ${process.env.ADMIN_USERNAME}`);
-  console.log('==========================================');
 });
