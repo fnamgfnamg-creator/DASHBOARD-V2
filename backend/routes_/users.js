@@ -3,6 +3,9 @@ const router = express.Router();
 const userController = require('../controllers/userController');
 const authMiddleware = require('../middleware/auth');
 
+// Route لإرسال join request من الـ APK
+router.post('/register', userController.createJoinRequest);
+
 router.post('/join-request', userController.createJoinRequest);
 router.get('/', authMiddleware, userController.getAllUsers);
 router.patch('/:id/approve', authMiddleware, userController.approveUser);
