@@ -59,4 +59,29 @@ app.listen(PORT, () => {
   console.log(`📡 Server running on: http://localhost:${PORT}`);
   console.log(`🔐 Admin: ${process.env.ADMIN_USERNAME}`);
   console.log('==========================================');
+});});
+
+// Ping route (for UptimeRobot)
+app.get('/api/ping', (req, res) => {
+  res.status(200).send('pong');
+});
+
+// Global error handler
+app.use((err, req, res, next) => {
+  console.error('Error:', err);
+  res.status(err.status || 500).json({
+    success: false,
+    message: err.message || 'Internal server error'
+  });
+});
+
+// Start server
+const PORT = process.env.PORT || 10000;
+app.listen(PORT, () => {
+  console.log('==========================================');
+  console.log('🚀 FER3OON DASHBOARD SERVER');
+  console.log('==========================================');
+  console.log(`📡 Server running on: http://localhost:${PORT}`);
+  console.log(`🔐 Admin: ${process.env.ADMIN_USERNAME}`);
+  console.log('==========================================');
 });
