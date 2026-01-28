@@ -67,38 +67,7 @@ exports.createJoinRequest = async (req, res) => {
   }
 };
 
-exports.getAllUsers = async (req, res) => {
-  try {
-    const { status, search } = req.query;
-    let query = {};
-
-    if (status && status !== 'ALL') {
-      query.status = status;
-    }
-
-    if (search) {
-      query.$or = [
-        { uid: { $regex: search, $options: 'i' } },
-        { deviceId: { $regex: search, $options: 'i' } }
-      ];
-    }
-
-    const users = await User.find(query).sort({ requestedAt: -1 });
-
-    res.json({
-      success: true,
-      users
-    });
-  } catch (error) {
-    console.error('Get users error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Server error fetching users'
-    });
-  }
-};
-
-exports.approveUser = async (req, res) => {
+// باقي الدوال (getAllUsers, approveUser, blockUser, unblockUser, deleteUser) بدون تغييرexports.approveUser = async (req, res) => {
   try {
     const { id } = req.params;
 
